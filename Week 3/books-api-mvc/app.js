@@ -1,6 +1,7 @@
 const express = require("express");
 const bodyParser = require("body-parser");
-const booksController = require("./controllers/booksController"); // Import controllers
+const booksController = require("./controller/bookController.js"); // Import controllers
+const validateBook = require("./middlewares/validateBook.js");
 
 const app = express();
 
@@ -10,8 +11,8 @@ app.use(bodyParser.urlencoded({ extended: true })); // For form data handling
 // Define individual routes for each controller function
 app.get("/books", booksController.getAllBooks);
 app.get("/books/:id", booksController.getBookById);
-app.post("/books", booksController.createBook);
-app.put("/books/:id", booksController.updateBook);
+app.post("/books", validateBook, booksController.createBook); // Add validateBook before createBook
+app.put("/books/:id", validateBook, booksController.updateBook); // Add validateBook before updateBook
 app.delete("/books/:id", booksController.deleteBook);
 
 const port = process.env.PORT || 3000;
