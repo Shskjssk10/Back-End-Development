@@ -59,27 +59,99 @@ document.addEventListener("DOMContentLoaded", function() {
         bookList.appendChild(bookItem);
     
     };
-    
-    
-    const submitButton = document.getElementById("submit-button-get");
+    async function updateIndivBook(){
+        const bookList = document.getElementById("book-list");
+        const boilerPlate = document.createElement("div");
+        boilerPlate.textContent = "There is nothing going at the moment! (Update)";
+
+        bookList.appendChild(boilerPlate);
+    }
+    async function uploadIndivBook(){
+        const bookList = document.getElementById("book-list");
+        const boilerPlate = document.createElement("div");
+        boilerPlate.textContent = "There is nothing going at the moment! (Upload)";
+
+        bookList.appendChild(boilerPlate);
+    }
+    async function deleteIndivBook(input){
+        try {
+            const response = await fetch(`/books/${input}`, {
+              method: "DELETE",
+            });
+        
+            if (!response.ok) {
+              throw new Error(`Failed to delete book: ${response.statusText}`);
+            }
+        
+            console.log("Book deleted successfully!");
+        
+            // Optional: Update UI or perform other actions after successful deletion
+          } catch (error) {
+            console.error("Error deleting book:", error);
+            const bookList = document.getElementById("book-list");
+            const boilerPlate = document.createElement("div");
+            boilerPlate.textContent = "Failed to delete :(";
+            bookList.appendChild(boilerPlate);
+            // Handle errors appropriately, e.g., display an error message to the user
+          }
+
+    }
+
+
+    const allSubmitButtons = document.querySelectorAll(".submit-button");
+    const updateInputs = document.querySelectorAll(".update-input");
+    const uploadInputs = document.querySelectorAll(".upload-input");
     const inputBox = document.getElementById("input-id-box");
+    const deleteInput = document.querySelector(".delete-input");
     const bookList = document.getElementById("book-list");
     const options = document.querySelectorAll("div.option");
     const sections = document.querySelectorAll("section.hide");
-    
-    submitButton.addEventListener("click", async () => {
-        event.preventDefault();
-        console.log("this is something!");
-        let input = inputBox.value;
-        
-        bookList.innerHTML = "";
-        
-        if (input === ""){
-            await fetchBooks();
-        } else { 
-            input = Number(input); 
-            await fetchIndivBook(input);
-        }
+
+    //Function checks which button is clicked and performs as accordingly
+    allSubmitButtons.forEach((button) => {
+        button.addEventListener("click", async () => {
+            event.preventDefault();
+            console.log(`${button.id} has been clicked!`)
+
+            bookList.innerHTML = "";
+
+            //get-submit-button is clicked
+            if (button.id.includes("get")){
+                let input = inputBox.value;
+
+                if (input === ""){
+                    await fetchBooks();
+                } else { 
+                    input = Number(input); 
+                    await fetchIndivBook(input);
+                }
+            }
+            //update-submit-button is clicked
+            else if (button.id.includes("update")){
+                await updateIndivBook();
+            }
+            //upload-submit-button is clicked
+            else if (button.id.includes("upload")){
+                await uploadIndivBook();
+            }
+            else {
+                let input = deleteInput.value;
+                console.log(input);
+                try {
+                    input = Number(input);
+                    console.log(input);
+                    if (input === ""){
+                        alert("Please enter an integer");
+                    }
+                    else { 
+                        await deleteIndivBook(input);
+                    }
+                }
+                catch (err){
+                    console.log("Error sending request", err);
+                }
+            }
+        })
     })
     
     options.forEach((option) => {

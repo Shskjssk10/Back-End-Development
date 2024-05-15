@@ -15,7 +15,7 @@
     <form>
         <label>Enter Book ID:</label>
         <input id="input-id-box">
-        <button id="submit-button-get">Submit</button>
+        <button class="submit-button" id="get-submit-button">Submit</button>
     </form>
 
     <hr>
@@ -27,26 +27,29 @@
     </navbar>
 
     <section class="hide" id="update-section">
-      <label>Enter Book ID:</label>
-      <input id="input-id-box"><br>
-      <label>Enter Author:</label>
-      <input id="input-author-box"><br>
-      <label>Enter Book Name:</label>
-      <input id="input-book-box"><br>
-      <button id="submit-button-something">Submit</button>
+      <form>
+        <label>Enter Book ID:</label>
+        <input class="update-input" id="input-id-box" required><br>
+        <label>Enter Author:</label>
+        <input class="update-input" id="input-author-box"><br>
+        <label>Enter Book Name:</label>
+        <input class="update-input" id="input-book-box"><br>
+        <input type="submit" class="submit-button" id="update-submit-button"></input>
+      </form>
     </section>
 
     <section class="hide" id="upload-section">
       <label>Enter Author:</label>
-      <input id="input-author-box"><br>
+      <input class="upload-input" id="input-author-box"><br>
       <label>Enter Book Name:</label>
-      <input id="input-book-box"><br>
-      <button id="submit-button-something">Submit</button>
+      <input class="upload-input" id="input-book-box"><br>
+      <button class="submit-button" id="upload-submit-button">Submit</button>
     </section>
 
     <section class="hide" id="delete-section">
       <label>Enter Book ID:</label>
-      <input id="input-id-box"><br>
+      <input class="delete-input" id="input-id-box"><br>
+      <button class="submit-button" id="delete-submit-button">Submit</button>
     </section>
 
     <hr>
