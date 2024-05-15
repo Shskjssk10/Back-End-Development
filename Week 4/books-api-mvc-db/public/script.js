@@ -66,12 +66,30 @@ document.addEventListener("DOMContentLoaded", function() {
 
         bookList.appendChild(boilerPlate);
     }
-    async function uploadIndivBook(){
-        const bookList = document.getElementById("book-list");
-        const boilerPlate = document.createElement("div");
-        boilerPlate.textContent = "There is nothing going at the moment! (Upload)";
-
-        bookList.appendChild(boilerPlate);
+    async function uploadIndivBook(bookAuthor, bookName){
+        try {
+            const response = await fetch("/books", {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json", // Indicate JSON data in request body
+              },
+              body: JSON.stringify({ // Convert data to JSON string for the request body
+                author: bookAuthor,
+                name: bookName,
+              }),
+            });
+        
+            if (!response.ok) {
+              throw new Error(`Failed to create book: ${response.statusText}`);
+            }
+        
+            console.log("Book created successfully!");
+        
+            // Optional: Handle successful creation (e.g., clear form, update UI)
+          } catch (error) {
+            console.error("Error creating book:", error);
+            // Handle errors appropriately (e.g., display error message to user)
+          }
     }
     async function deleteIndivBook(input){
         try {
@@ -132,7 +150,10 @@ document.addEventListener("DOMContentLoaded", function() {
             }
             //upload-submit-button is clicked
             else if (button.id.includes("upload")){
-                await uploadIndivBook();
+                let [bookAuthor, bookName] = uploadInputs; // Destructuring assignment
+                bookAuthor = bookAuthor.value;
+                bookName = bookName.value;
+                // await uploadIndivBook(bookAuthor, bookName);
             }
             else {
                 let input = deleteInput.value;
@@ -154,6 +175,7 @@ document.addEventListener("DOMContentLoaded", function() {
         })
     })
     
+    //Display respective sections
     options.forEach((option) => {
         option.addEventListener("click", () => {
             options.forEach((opt) => opt.classList.remove("active")); 
