@@ -37,3 +37,14 @@
   background-color: grey;
   color: white;
 }
+.hide{
+  display: none;
+}
+.show{
+  display: block;
+}
+.active{
+  transition: 0.3s;
+  background-color: grey;
+  color: white;
+}
