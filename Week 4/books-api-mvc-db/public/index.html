@@ -1,17 +1,43 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta charset="UTF-8" />
+    <meta charset=UTF-8/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Books App</title>
     <link rel="stylesheet" href="./styles.css" />
   </head>
   <body>
     <h1>Books API</h1>
-    <label>Enter Book ID:</label>
-    <input id="input-id-box">
-    <button id="submit-button">Submit</button>
+
+
+    <hr>
+    <h2>Get Individual Book</h2>
+    <form>
+        <label>Enter Book ID:</label>
+        <input id="input-id-box">
+        <button id="submit-button-get">Submit</button>
+    </form>
+
+    <hr>
+    <h2>Update / Upload Book</h2>
+    <navbar class="navbar">
+      <div class="option" id="update-option">Update</div>
+      <div class="option" id="upload-option">Upload</div>
+    </navbar>
+    <section class="upload-section">
+        <label>Enter Book Name:</label>
+        <input id="input-name-box">
+        <button id="submit-button">Submit</button><br>
+        <label>Enter Author:</label>
+        <input id="input-author-box">
+        <button id="submit-button-post/get">Submit</button>
+
+    </section>
+
+    <hr>
+
     <section id="book-list"></section>
+
     <script src="./script.js"></script>
   </body>
 </html>

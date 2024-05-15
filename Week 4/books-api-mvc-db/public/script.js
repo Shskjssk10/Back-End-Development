@@ -28,7 +28,7 @@ async function fetchBooks() {
       bookList.appendChild(bookItem);
     });
 }
-async function fecthIndivBook(input) {
+async function fetchIndivBook(input) {
     const response = await fetch(`/books/${input}`); // Replace with your API endpoint
     const data = await response.json();
   
@@ -59,11 +59,14 @@ async function fecthIndivBook(input) {
 };
 
 
-const submitButton = document.getElementById("submit-button");
+const submitButton = document.getElementById("submit-button-get");
 const inputBox = document.getElementById("input-id-box");
 const bookList = document.getElementById("book-list");
+const navbar = document.querySelector(".navbar");
+const options = navbar.querySelectorAll("#option");
 
 submitButton.addEventListener("click", async () => {
+    event.preventDefault();
     let input = inputBox.value;
     
     bookList.innerHTML = "";
@@ -72,6 +75,13 @@ submitButton.addEventListener("click", async () => {
         await fetchBooks();
     } else { 
         input = Number(input); 
-        await fecthIndivBook(input);
+        await fetchIndivBook(input);
     }
 })
+
+options.forEach((option) => {
+    option.addEventListener("click", () => {
+      options.forEach((opt) => opt.classList.remove("active")); // Remove active class from all options
+      this.classList.add("active"); // Add active class to the clicked option
+    });
+  });
