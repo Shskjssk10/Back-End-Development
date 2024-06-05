@@ -71,7 +71,7 @@ async function searchUsers(req, res) {
   
     try {
         const userController = new User();
-        const users = await userController.searchUsers(searchTerm);
+        const users = await User.searchUsers(searchTerm);
         res.json(users);
     } catch (error) {
         console.error(error);

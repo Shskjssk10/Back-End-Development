@@ -25,10 +25,10 @@ app.delete("/books/:id", booksController.deleteBook); // DELETE for deleting boo
 
 app.post("/users", usersController.createUser); // Create user
 app.get("/users", usersController.getAllUsers); // Get all users
+app.get("/users/search", usersController.searchUsers);
 app.get("/users/:id", usersController.getUserById); // Get user by ID
 app.put("/users/:id", usersController.updateUser); // Update user
 app.delete("/users/:id", usersController.deleteUser); // Delete user
-app.get("/users/search", usersController.searchUsers);
 
 app.listen(port, async () => {
   try {
