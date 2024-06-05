@@ -65,7 +65,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
       // Only include properties if they have values
       if (bookAuthor) data.author = bookAuthor;
-      if (bookTitle) data.name = bookTitle;
+      if (bookTitle) data.title = bookTitle;
     
       try {
         const response = await fetch(`/books/${bookID}`, {
@@ -174,8 +174,7 @@ document.addEventListener("DOMContentLoaded", function() {
               bookID = bookID.value;
               bookTitle = bookTitle.value;
               bookAuthor = bookAuthor.value;
-              // await updateIndivBook(bookID, bookTitle, bookAuthor);
-              console.log("Update is incomplete! Sorry!");
+              await updateIndivBook(bookID, bookTitle, bookAuthor);
             }
             //upload-submit-button is clicked
             else if (button.id.includes("upload")){
